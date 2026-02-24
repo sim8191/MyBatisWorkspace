@@ -1,0 +1,31 @@
+package com.kh.mybatis.student.model.service;
+
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.kh.mybatis.common.SqlSessionTemplate;
+import com.kh.mybatis.student.model.dao.StudentDao;
+import com.kh.mybatis.student.service.model.vo.Student;
+
+public class StudentService {
+	
+	private StudentDao dao = new StudentDao();
+	
+	public int insertStudent(Student s) {
+		
+		SqlSession session = SqlSessionTemplate.getSession();
+		
+		try {
+			
+			int result = dao.insertStudent(session, s);
+			// 여기 하나 적어야함 뻑남
+		}catch(Exception e) {
+			session.commit();
+		}finally {
+			session.close();
+		}
+		
+		return 0;
+	}
+	
+}

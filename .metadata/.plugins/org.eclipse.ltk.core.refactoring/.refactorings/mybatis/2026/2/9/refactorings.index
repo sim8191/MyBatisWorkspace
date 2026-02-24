@@ -1,0 +1,4 @@
+1771914470053	Rename package 'mapper.mapperStudent'
+1771914647825	Rename package 'mapper.Student'
+1771915321686	Move 'insertStudent.jsp' to 'student'
+1771917209139	Rename type 'Dao'
