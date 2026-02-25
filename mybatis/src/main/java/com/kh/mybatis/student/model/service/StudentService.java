@@ -1,9 +1,13 @@
 package com.kh.mybatis.student.model.service;
 
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.kh.mybatis.common.SqlSessionTemplate;
+
 import com.kh.mybatis.student.model.dao.StudentDao;
 import com.kh.mybatis.student.service.model.vo.Student;
 
@@ -29,5 +33,54 @@ public class StudentService {
 		
 		return result;
 	}
+
+	public int insertStudent(Map<String, Object> param) {
+		SqlSession session = SqlSessionTemplate.getSession();
+		int result = dao.insertStudentMap(session, param);
+
+		if(result > 0) {
+			session.commit();
+		}else {
+			session.rollback();
+		}
+		return result;
+	}
+	
+	public int selectStudentCount() {
+		SqlSession session = SqlSessionTemplate.getSession();
+		int total = dao.selectStudentCount(session);
+		
+		return total;
+		
+	}
+	
+	public Student selectOneStudent(int no) {
+		SqlSession session = SqlSessionTemplate.getSession();
+		Student s = dao.selectStudent(session, no);
+		session.close();
+		
+		return s;
+	}
+
+	public int updateStudent(Student s) {
+		SqlSession session = SqlSessionTemplate.getSession();
+		int result = dao.updateStudent(session, s);
+		
+		if(result > 0) {
+			session.commit();
+		}else {
+			session.rollback();
+		}
+		session.close();
+		return 0;
+	}
+
+	public List<Student> selectStudentList() {
+		SqlSession session = SqlSessionTemplate.getSession();
+		List<Student> list = dao.selectStudentList(session);
+		session.close();
+		return list;
+	}
+
 	
 }
